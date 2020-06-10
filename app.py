@@ -4,7 +4,7 @@ from flask_login import LoginManager
 
 
 
-import functions.db_fns.db_connect
+from functions.db_connect import connect_db
 from api.api_user import router_user
 
 
@@ -15,7 +15,7 @@ app.config['SECRET_KEY'] = 'secret_key'
 socketio = SocketIO(app)
 login_manager.init_app(app)
 
-
+ 
 @login_manager.user_loader
 def load_user(user_id):
     # return User.get(user_id)
@@ -25,6 +25,8 @@ def load_user(user_id):
 # APIS #
 # User Api
 app.register_blueprint(router_user)
+connect_db()
+
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
