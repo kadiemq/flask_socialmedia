@@ -2,6 +2,7 @@ from flask import Flask, session
 from flask_socketio import SocketIO
 from flask_login import LoginManager
 
+from api.api_index import router_index
 from api.api_user import router_user
 from functions.database_layer import Database
 from models.User import User
@@ -28,7 +29,9 @@ def load_user(user_id):
 # APIS #
 # User Api
 app.register_blueprint(router_user)
-# connect_db()
+
+# Index Api #
+app.register_blueprint(router_index)
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
