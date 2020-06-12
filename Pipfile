@@ -11,6 +11,9 @@ flask = "*"
 psycopg2 = "*"
 flask-socketio = "*"
 flask-login = "*"
+passlib = "*"
+unique-id = "*"
+bcrypt = "*"
 
 [requires]
 python_version = "3.7"

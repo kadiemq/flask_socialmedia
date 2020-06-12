@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register Page</title>
+</head>
+<body>
+    <div class="register_form">
+        <label for="first_name">First Name</label><input type="text" id="first_name" placeholder="Enter your first name">
+        <label for="last_name">Last Name</label><input type="text" id="last_name" placeholder="Enter your last name">
+        <label for="email">Email</label><input type="text" id="email" placeholder="Enter your email">
+        <label for="password">Password</label><input type="password" id="password" placeholder="Enter your password">
+        <label for="password2">Confirm Password</label><input type="password" id="password2" placeholder="Confirm your password">
+        <button id="submit">Register</button>
+    </div>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+    const submit_button = document.getElementById('submit')
+
+    submit_button.addEventListener('click' , () => {
+        let first_name = document.getElementById('first_name').value
+        let last_name = document.getElementById('last_name').value
+        let email = document.getElementById('email').value
+        let password = document.getElementById('password').value
+        let password_confirm = document.getElementById('password2').value
+
+        if (!check_password_if_match(password, password_confirm)) return console.log("Passwords didn't match")
+
+        const data = {first_name, last_name, email, password}
+
+        axios.post('/register', data, {'Content-Type': 'application/json'})
+            .then((res) => {console.log(res.data)})
+            .catch((error) => {
+                console.log(`${error.response.data} received`)
+            })
+    })
+
+
+
+    function check_password_if_match(pass1, pass2) {
+        return pass1 === pass2;
+    }
+</script>
+</html>

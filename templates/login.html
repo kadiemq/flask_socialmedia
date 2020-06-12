@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login Page</title>
+</head>
+<body>
+<div id="login_form">
+    <label for="email">Email: </label><input type="text" placeholder="Enter your email" id="email">
+    <label for="password">Password: </label><input type="password" placeholder="Enter your password" id="password">
+    <button id="submit">Login</button>
+</div>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+
+    let submit_button = document.getElementById('submit')
+
+    submit_button.addEventListener('click' , () => {
+        let email = document.getElementById('email').value
+        let password = document.getElementById('password').value
+        axios.post('/login', {'email':email, 'password':password}, {'Content-Type': 'application/json'})
+            .then(function (response) {
+                console.log(response.data);
+                if (response.data.redirect) {
+                    window.location.href = response.data.redirect;
+                }
+            })
+            .catch(function (error) {
+                if(error.response) console.log(error.response.data);
+
+                console.log(error);
+            })
+    })
+</script>
+</html>
